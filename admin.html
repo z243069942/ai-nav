@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理后台 — AI 应用导航</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>" />
+  <style>
+    :root {
+      --bg: #0f0f13;
+      --bg2: #16161d;
+      --bg3: #1e1e2a;
+      --border: #2a2a3a;
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --text: #e8e8f0;
+      --text2: #9999b3;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ——— Header ——— */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex; align-items: center; gap: 16px;
+      position: sticky; top: 0; z-index: 200;
+    }
+    .logo { font-size: 18px; font-weight: 800; color: var(--accent2); text-decoration: none; }
+    .header-tag { background: rgba(108,99,255,0.2); color: var(--accent2); border-radius: 6px; padding: 2px 8px; font-size: 12px; }
+    .header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.2s, transform 0.1s; }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #8b5cf6); color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text2); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
+    .btn-danger { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+    .btn-success { background: rgba(34,197,94,0.15); color: var(--success); border: 1px solid rgba(34,197,94,0.3); }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    a.btn { text-decoration: none; }
+
+    /* ——— Layout ——— */
+    .container { max-width: 1300px; margin: 0 auto; padding: 28px 24px; }
+
+    /* ——— Auth Panel ——— */
+    #authPanel {
+      max-width: 480px; margin: 80px auto; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 40px;
+    }
+    .auth-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .auth-sub { color: var(--text2); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 14px; color: var(--text); font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 80px; }
+    .hint { font-size: 12px; color: var(--text2); margin-top: 6px; }
+    .hint a { color: var(--accent2); }
+
+    /* ——— Dashboard ——— */
+    #dashboard { display: none; }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px;
+    }
+    .stat-card .num { font-size: 32px; font-weight: 800; color: var(--accent2); }
+    .stat-card .lbl { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+    /* ——— Tabs ——— */
+    .tabs { display: flex; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 24px; width: fit-content; }
+    .tab { padding: 8px 18px; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text2); transition: all 0.2s; }
+    .tab.active { background: var(--accent); color: #fff; font-weight: 700; }
+
+    /* ——— Table ——— */
+    .table-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .table-header {
+      display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .table-search { flex: 1; max-width: 300px; }
+    .table-search input { padding: 8px 14px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+    td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid rgba(42,42,58,0.5); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(30,30,42,0.5); }
+    .td-name { display: flex; align-items: center; gap: 10px; }
+    .td-logo { width: 32px; height: 32px; border-radius: 8px; background: var(--bg3); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+    .td-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+    .badge-purple { background: rgba(108,99,255,0.2); color: var(--accent2); }
+    .badge-green { background: rgba(34,197,94,0.15); color: var(--success); }
+    .badge-gray { background: var(--bg3); color: var(--text2); }
+    .action-btns { display: flex; gap: 6px; }
+    .td-url a { color: var(--accent2); text-decoration: none; font-size: 12px; }
+
+    /* ——— Modal ——— */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 500;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
+      padding: 32px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-title { font-size: 20px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .checkbox-group { display: flex; align-items: center; gap: 8px; }
+    .checkbox-group input[type=checkbox] { width: auto; }
+
+    /* ——— Alert ——— */
+    .alert {
+      position: fixed; bottom: 24px; right: 24px; z-index: 600;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 20px; font-size: 14px; display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4); transform: translateY(80px); opacity: 0;
+      transition: transform 0.3s, opacity 0.3s; max-width: 360px;
+    }
+    .alert.show { transform: translateY(0); opacity: 1; }
+    .alert.success { border-color: rgba(34,197,94,0.4); }
+    .alert.error { border-color: rgba(239,68,68,0.4); }
+
+    /* ——— Loading ——— */
+    .loading { text-align: center; padding: 60px; color: var(--text2); }
+    .spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ——— Config box ——— */
+    .config-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+    .config-box h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .code-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 12px; color: var(--text2); overflow-x: auto; margin-top: 8px; }
+    .tag-input-wrap { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 8px; cursor: text; }
+    .tag-chip { background: rgba(108,99,255,0.2); color: var(--accent2); border-radius: 6px; padding: 3px 8px; font-size: 12px; display: flex; align-items: center; gap: 4px; }
+    .tag-chip .rm { cursor: pointer; opacity: 0.7; }
+    .tag-chip .rm:hover { opacity: 1; }
+    #tagInputField { background: none; border: none; outline: none; color: var(--text); font-size: 13px; min-width: 80px; flex: 1; padding: 3px 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">🤖 AI 导航</a>
+  <span class="header-tag">管理后台</span>
+  <div class="header-right">
+    <a class="btn btn-outline" href="index.html">← 返回首页</a>
+    <button class="btn btn-danger btn-sm" id="logoutBtn" style="display:none" onclick="logout()">退出登录</button>
+  </div>
+</header>
+
+<!-- Auth Panel -->
+<div class="container" id="authPanel">
+  <div class="auth-title">🔑 连接 GitHub</div>
+  <div class="auth-sub">
+    管理后台通过 <strong>GitHub API</strong> 直接读写仓库中的 <code>data.json</code>，无需服务器。<br/>
+    请填写 GitHub 仓库信息和个人访问令牌。
+  </div>
+
+  <div class="config-box">
+    <h3>📋 如何获取 Token</h3>
+    <ol style="color:var(--text2);font-size:13px;line-height:2;padding-left:20px;">
+      <li>访问 <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent2)">GitHub → Settings → Tokens → Generate new token (classic)</a></li>
+      <li>勾选 <strong style="color:var(--text)">repo</strong>（完整仓库权限）</li>
+      <li>点击 Generate token，复制 token（只显示一次）</li>
+    </ol>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>GitHub 用户名</label>
+      <input type="text" id="ghUser" placeholder="z243069942" value="z243069942" />
+    </div>
+    <div class="form-group">
+      <label>仓库名称</label>
+      <input type="text" id="ghRepo" placeholder="ai-nav" value="ai-nav" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>分支（默认 main）</label>
+    <input type="text" id="ghBranch" placeholder="main" value="main" />
+  </div>
+  <div class="form-group">
+    <label>Personal Access Token</label>
+    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+    <div class="hint">⚠️ Token 仅保存在浏览器 localStorage，不会上传任何服务器。</div>
+  </div>
+
+  <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="connectGitHub()">
+    🚀 连接 GitHub 并进入后台
+  </button>
+</div>
+
+<!-- Dashboard -->
+<div class="container" id="dashboard">
+  <div class="stats-row" id="statsRow"></div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('apps')">应用管理</div>
+    <div class="tab" onclick="switchTab('cats')">分类管理</div>
+    <div class="tab" onclick="switchTab('settings')">设置</div>
+  </div>
+
+  <!-- Apps Tab -->
+  <div id="tabApps">
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="table-search">
+          <input type="text" id="adminSearch" placeholder="🔍 搜索应用..." oninput="renderTable()" />
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="openModal('add')">+ 添加应用</button>
+        <button class="btn btn-outline btn-sm" onclick="loadData()">🔄 刷新</button>
+      </div>
+      <div id="tableWrap">
+        <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories Tab -->
+  <div id="tabCats" style="display:none">
+    <div class="table-wrap">
+      <div class="table-header">
+        <span style="font-weight:600;">分类列表</span>
+        <button class="btn btn-primary btn-sm" onclick="openCatModal('add')">+ 添加分类</button>
+      </div>
+      <div id="catTableWrap"></div>
+    </div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div id="tabSettings" style="display:none">
+    <div class="config-box">
+      <h3>⚙️ 当前配置</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>用户名</label>
+          <input type="text" id="setUser" />
+        </div>
+        <div class="form-group">
+          <label>仓库名</label>
+          <input type="text" id="setRepo" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>分支</label>
+          <input type="text" id="setBranch" />
+        </div>
+        <div class="form-group">
+          <label>Token（留空不修改）</label>
+          <input type="password" id="setToken" placeholder="重新输入 token..." />
+        </div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="saveSettings()">保存配置</button>
+      <button class="btn btn-danger btn-sm" style="margin-left:8px" onclick="logout()">退出登录</button>
+    </div>
+    <div class="config-box">
+      <h3>📦 导出 / 导入数据</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" onclick="exportData()">📥 导出 JSON</button>
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">📤 导入 JSON</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this)" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- App Modal -->
+<div class="modal-overlay" id="appModal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">📝 添加应用</div>
+    <input type="hidden" id="editId" />
+    <div class="form-row">
+      <div class="form-group">
+        <label>应用名称 *</label>
+        <input type="text" id="fName" placeholder="如：ChatGPT" />
+      </div>
+      <div class="form-group">
+        <label>分类 *</label>
+        <select id="fCat"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>网址 URL *</label>
+      <input type="url" id="fUrl" placeholder="https://..." />
+    </div>
+    <div class="form-group">
+      <label>应用描述 *</label>
+      <textarea id="fDesc" placeholder="简短介绍这个工具..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>标签（回车添加）</label>
+      <div class="tag-input-wrap" id="tagWrap" onclick="document.getElementById('tagInputField').focus()">
+        <input type="text" id="tagInputField" placeholder="输入标签后回车..." onkeydown="handleTagInput(event)" />
+      </div>
+      <div class="hint">常用标签：免费、付费、国产、开源、多模态…</div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox-group">
+        <input type="checkbox" id="fFeatured" />
+        <label for="fFeatured" style="margin:0">⭐ 设为精选推荐</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('appModal')">取消</button>
+      <button class="btn btn-primary" onclick="saveApp()">💾 保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cat Modal -->
+<div class="modal-overlay" id="catModal">
+  <div class="modal">
+    <div class="modal-title" id="catModalTitle">📁 添加分类</div>
+    <input type="hidden" id="editCatId" />
+    <div class="form-row">
+      <div class="form-group">
+        <label>分类 ID（英文字母）*</label>
+        <input type="text" id="cId" placeholder="如：chat" />
+      </div>
+      <div class="form-group">
+        <label>显示名称 *</label>
+        <input type="text" id="cName" placeholder="如：对话聊天" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>图标 Emoji *</label>
+        <input type="text" id="cIcon" placeholder="如：💬" />
+      </div>
+      <div class="form-group">
+        <label>描述</label>
+        <input type="text" id="cDesc" placeholder="简短描述..." />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('catModal')">取消</button>
+      <button class="btn btn-primary" onclick="saveCat()">💾 保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="delModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-title">⚠️ 确认删除</div>
+    <p style="color:var(--text2);font-size:14px;line-height:1.7" id="delMsg"></p>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('delModal')">取消</button>
+      <button class="btn btn-danger" id="delConfirmBtn">删除</button>
+    </div>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="alert" id="alert"></div>
+
+<script>
+  // ——— State ———
+  let cfg = {};
+  let data = { categories: [], apps: [] };
+  let currentTags = [];
+  let editingMode = 'add';
+
+  // ——— Init ———
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('ai_nav_cfg');
+    if (saved) {
+      cfg = JSON.parse(saved);
+      showDashboard();
+    }
+  });
+
+  function showDashboard() {
+    document.getElementById('authPanel').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('logoutBtn').style.display = 'flex';
+    // fill settings form
+    document.getElementById('setUser').value = cfg.user || '';
+    document.getElementById('setRepo').value = cfg.repo || '';
+    document.getElementById('setBranch').value = cfg.branch || 'main';
+    loadData();
+  }
+
+  async function connectGitHub() {
+    const user = document.getElementById('ghUser').value.trim();
+    const repo = document.getElementById('ghRepo').value.trim();
+    const branch = document.getElementById('ghBranch').value.trim() || 'main';
+    const token = document.getElementById('ghToken').value.trim();
+    if (!user || !repo || !token) return showAlert('请填写完整信息', 'error');
+
+    cfg = { user, repo, branch, token };
+    // test connection
+    try {
+      await ghGet(`repos/${user}/${repo}`);
+      localStorage.setItem('ai_nav_cfg', JSON.stringify(cfg));
+      showAlert('✅ 连接成功！正在加载数据…', 'success');
+      showDashboard();
+    } catch (e) {
+      showAlert('连接失败：' + e.message, 'error');
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('ai_nav_cfg');
+    location.reload();
+  }
+
+  function saveSettings() {
+    cfg.user = document.getElementById('setUser').value.trim();
+    cfg.repo = document.getElementById('setRepo').value.trim();
+    cfg.branch = document.getElementById('setBranch').value.trim() || 'main';
+    const t = document.getElementById('setToken').value.trim();
+    if (t) cfg.token = t;
+    localStorage.setItem('ai_nav_cfg', JSON.stringify(cfg));
+    showAlert('配置已保存', 'success');
+  }
+
+  // ——— GitHub API ———
+  async function ghGet(path) {
+    const r = await fetch(`https://api.github.com/${path}`, {
+      headers: { Authorization: `token ${cfg.token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+    return r.json();
+  }
+
+  async function ghGetFile(path) {
+    return ghGet(`repos/${cfg.user}/${cfg.repo}/contents/${path}?ref=${cfg.branch}`);
+  }
+
+  async function ghPutFile(path, content, sha, message) {
+    const r = await fetch(`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${path}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${cfg.token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message,
+        content: btoa(unescape(encodeURIComponent(content))),
+        sha,
+        branch: cfg.branch
+      })
+    });
+    if (!r.ok) {
+      const err = await r.json();
+      throw new Error(err.message || r.statusText);
+    }
+    return r.json();
+  }
+
+  let fileSha = '';
+  async function loadData() {
+    document.getElementById('tableWrap').innerHTML = '<div class="loading"><div class="spinner"></div><p>从 GitHub 加载数据...</p></div>';
+    try {
+      const file = await ghGetFile('data.json');
+      fileSha = file.sha;
+      const decoded = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+      data = JSON.parse(decoded);
+      renderStats();
+      renderTable();
+      renderCatTable();
+      // populate cat select
+      const sel = document.getElementById('fCat');
+      sel.innerHTML = data.categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+    } catch (e) {
+      document.getElementById('tableWrap').innerHTML = `<div class="loading"><p style="color:var(--danger)">加载失败：${e.message}</p></div>`;
+    }
+  }
+
+  async function saveData(msg) {
+    const content = JSON.stringify(data, null, 2);
+    await ghPutFile('data.json', content, fileSha, msg || '✏️ Update data.json via Admin');
+    // refresh sha
+    const file = await ghGetFile('data.json');
+    fileSha = file.sha;
+  }
+
+  // ——— Stats ———
+  function renderStats() {
+    const cats = data.categories.length;
+    const total = data.apps.length;
+    const featured = data.apps.filter(a => a.featured).length;
+    document.getElementById('statsRow').innerHTML = `
+      <div class="stat-card"><div class="num">${total}</div><div class="lbl">AI 应用</div></div>
+      <div class="stat-card"><div class="num">${cats}</div><div class="lbl">分类目录</div></div>
+      <div class="stat-card"><div class="num">${featured}</div><div class="lbl">精选推荐</div></div>
+      <div class="stat-card"><div class="num">${(total - featured)}</div><div class="lbl">普通收录</div></div>
+    `;
+  }
+
+  // ——— Table ———
+  function renderTable() {
+    const q = (document.getElementById('adminSearch')?.value || '').toLowerCase();
+    let apps = [...data.apps];
+    if (q) apps = apps.filter(a => a.name.toLowerCase().includes(q) || a.url.toLowerCase().includes(q) || a.description.toLowerCase().includes(q));
+
+    const catMap = {};
+    data.categories.forEach(c => catMap[c.id] = c);
+
+    document.getElementById('tableWrap').innerHTML = apps.length === 0
+      ? '<div class="loading"><p>暂无数据</p></div>'
+      : `<table>
+          <thead><tr>
+            <th>应用</th><th>分类</th><th>标签</th><th>精选</th><th>操作</th>
+          </tr></thead>
+          <tbody>
+            ${apps.map(app => {
+              const cat = catMap[app.category];
+              const domain = (() => { try { return new URL(app.url).hostname; } catch { return ''; } })();
+              return `<tr>
+                <td>
+                  <div class="td-name">
+                    <div class="td-logo">
+                      <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" onerror="this.style.display='none'" />
+                    </div>
+                    <div>
+                      <div style="font-weight:600">${app.name}</div>
+                      <div class="td-url"><a href="${app.url}" target="_blank">${domain}</a></div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge badge-purple">${cat ? cat.icon + ' ' + cat.name : app.category}</span></td>
+                <td>${(app.tags || []).slice(0,2).map(t => `<span class="badge badge-gray">${t}</span>`).join(' ')}</td>
+                <td>${app.featured ? '<span class="badge badge-green">⭐ 精选</span>' : '<span class="badge badge-gray">普通</span>'}</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn btn-outline btn-sm" onclick="openModal('edit','${app.id}')">编辑</button>
+                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('app','${app.id}','${app.name}')">删除</button>
+                  </div>
+                </td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>`;
+  }
+
+  function renderCatTable() {
+    const counts = {};
+    data.apps.forEach(a => counts[a.category] = (counts[a.category] || 0) + 1);
+    document.getElementById('catTableWrap').innerHTML = `<table>
+      <thead><tr><th>图标</th><th>分类 ID</th><th>名称</th><th>描述</th><th>应用数</th><th>操作</th></tr></thead>
+      <tbody>
+        ${data.categories.map(c => `<tr>
+          <td style="font-size:24px">${c.icon}</td>
+          <td><code style="color:var(--text2);font-size:12px">${c.id}</code></td>
+          <td style="font-weight:600">${c.name}</td>
+          <td style="color:var(--text2);font-size:12px">${c.description || ''}</td>
+          <td><span class="badge badge-gray">${counts[c.id] || 0}</span></td>
+          <td>
+            <div class="action-btns">
+              <button class="btn btn-outline btn-sm" onclick="openCatModal('edit','${c.id}')">编辑</button>
+              <button class="btn btn-danger btn-sm" onclick="confirmDelete('cat','${c.id}','${c.name}')">删除</button>
+            </div>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+  }
+
+  // ——— Tabs ———
+  function switchTab(name) {
+    ['apps','cats','settings'].forEach(t => {
+      document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t === name ? 'block' : 'none';
+    });
+    document.querySelectorAll('.tab').forEach((el, i) => {
+      el.classList.toggle('active', ['apps','cats','settings'][i] === name);
+    });
+  }
+
+  // ——— Tag Input ———
+  function renderTagChips() {
+    const wrap = document.getElementById('tagWrap');
+    const field = document.getElementById('tagInputField');
+    wrap.querySelectorAll('.tag-chip').forEach(e => e.remove());
+    currentTags.forEach((t, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.innerHTML = `${t} <span class="rm" onclick="removeTag(${i})">×</span>`;
+      wrap.insertBefore(chip, field);
+    });
+  }
+  function handleTagInput(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = e.target.value.trim().replace(/,/g, '');
+      if (val && !currentTags.includes(val)) { currentTags.push(val); renderTagChips(); }
+      e.target.value = '';
+    }
+    if (e.key === 'Backspace' && e.target.value === '' && currentTags.length) {
+      currentTags.pop(); renderTagChips();
+    }
+  }
+  function removeTag(i) { currentTags.splice(i, 1); renderTagChips(); }
+
+  // ——— App Modal ———
+  function openModal(mode, id) {
+    editingMode = mode;
+    currentTags = [];
+    if (mode === 'add') {
+      document.getElementById('modalTitle').textContent = '📝 添加应用';
+      document.getElementById('editId').value = '';
+      ['fName','fUrl','fDesc'].forEach(f => document.getElementById(f).value = '');
+      document.getElementById('fFeatured').checked = false;
+    } else {
+      const app = data.apps.find(a => a.id === id);
+      if (!app) return;
+      document.getElementById('modalTitle').textContent = '✏️ 编辑应用';
+      document.getElementById('editId').value = app.id;
+      document.getElementById('fName').value = app.name;
+      document.getElementById('fUrl').value = app.url;
+      document.getElementById('fDesc').value = app.description;
+      document.getElementById('fCat').value = app.category;
+      document.getElementById('fFeatured').checked = !!app.featured;
+      currentTags = [...(app.tags || [])];
+    }
+    renderTagChips();
+    document.getElementById('appModal').classList.add('open');
+  }
+
+  async function saveApp() {
+    const name = document.getElementById('fName').value.trim();
+    const url = document.getElementById('fUrl').value.trim();
+    const desc = document.getElementById('fDesc').value.trim();
+    const cat = document.getElementById('fCat').value;
+    const featured = document.getElementById('fFeatured').checked;
+    if (!name || !url || !desc) return showAlert('请填写必填项', 'error');
+
+    if (editingMode === 'add') {
+      const newId = String(Date.now());
+      data.apps.push({ id: newId, name, url, category: cat, description: desc, tags: currentTags, featured });
+    } else {
+      const id = document.getElementById('editId').value;
+      const idx = data.apps.findIndex(a => a.id === id);
+      if (idx === -1) return;
+      data.apps[idx] = { ...data.apps[idx], name, url, category: cat, description: desc, tags: currentTags, featured };
+    }
+
+    closeModal('appModal');
+    try {
+      await saveData(editingMode === 'add' ? `➕ Add app: ${name}` : `✏️ Update app: ${name}`);
+      renderStats(); renderTable();
+      showAlert(editingMode === 'add' ? '✅ 应用已添加' : '✅ 应用已更新', 'success');
+    } catch (e) {
+      showAlert('保存失败：' + e.message, 'error');
+    }
+  }
+
+  // ——— Cat Modal ———
+  function openCatModal(mode, id) {
+    if (mode === 'add') {
+      document.getElementById('catModalTitle').textContent = '📁 添加分类';
+      document.getElementById('editCatId').value = '';
+      ['cId','cName','cIcon','cDesc'].forEach(f => document.getElementById(f).value = '');
+    } else {
+      const c = data.categories.find(c => c.id === id);
+      if (!c) return;
+      document.getElementById('catModalTitle').textContent = '✏️ 编辑分类';
+      document.getElementById('editCatId').value = c.id;
+      document.getElementById('cId').value = c.id;
+      document.getElementById('cName').value = c.name;
+      document.getElementById('cIcon').value = c.icon;
+      document.getElementById('cDesc').value = c.description || '';
+    }
+    document.getElementById('catModal').classList.add('open');
+  }
+
+  async function saveCat() {
+    const id = document.getElementById('cId').value.trim();
+    const name = document.getElementById('cName').value.trim();
+    const icon = document.getElementById('cIcon').value.trim();
+    const description = document.getElementById('cDesc').value.trim();
+    if (!id || !name || !icon) return showAlert('请填写必填项', 'error');
+
+    const editId = document.getElementById('editCatId').value;
+    if (!editId) {
+      data.categories.push({ id, name, icon, description });
+    } else {
+      const idx = data.categories.findIndex(c => c.id === editId);
+      if (idx !== -1) data.categories[idx] = { id, name, icon, description };
+    }
+    const sel = document.getElementById('fCat');
+    sel.innerHTML = data.categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+
+    closeModal('catModal');
+    try {
+      await saveData(!editId ? `➕ Add category: ${name}` : `✏️ Update category: ${name}`);
+      renderStats(); renderCatTable();
+      showAlert(!editId ? '✅ 分类已添加' : '✅ 分类已更新', 'success');
+    } catch (e) {
+      showAlert('保存失败：' + e.message, 'error');
+    }
+  }
+
+  // ——— Delete ———
+  function confirmDelete(type, id, name) {
+    document.getElementById('delMsg').textContent = `确定删除「${name}」吗？此操作将直接更新 GitHub，不可撤销。`;
+    document.getElementById('delConfirmBtn').onclick = () => doDelete(type, id, name);
+    document.getElementById('delModal').classList.add('open');
+  }
+
+  async function doDelete(type, id, name) {
+    closeModal('delModal');
+    if (type === 'app') {
+      data.apps = data.apps.filter(a => a.id !== id);
+    } else {
+      data.categories = data.categories.filter(c => c.id !== id);
+    }
+    try {
+      await saveData(`🗑️ Delete ${type}: ${name}`);
+      renderStats(); renderTable(); renderCatTable();
+      showAlert('✅ 已删除', 'success');
+    } catch (e) {
+      showAlert('删除失败：' + e.message, 'error');
+    }
+  }
+
+  // ——— Modal helpers ———
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+  });
+
+  // ——— Export / Import ———
+  function exportData() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'data.json';
+    a.click();
+  }
+
+  function importData(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async e => {
+      try {
+        const imported = JSON.parse(e.target.result);
+        if (!imported.apps || !imported.categories) throw new Error('格式不正确');
+        data = imported;
+        await saveData('📤 Import data.json');
+        renderStats(); renderTable(); renderCatTable();
+        showAlert('✅ 数据导入成功', 'success');
+      } catch (err) {
+        showAlert('导入失败：' + err.message, 'error');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // ——— Alert ———
+  let alertTimer;
+  function showAlert(msg, type = 'success') {
+    const el = document.getElementById('alert');
+    el.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg;
+    el.className = 'alert ' + type + ' show';
+    clearTimeout(alertTimer);
+    alertTimer = setTimeout(() => el.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
