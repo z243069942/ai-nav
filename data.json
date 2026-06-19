@@ -767,6 +767,15 @@
         "免费/付费"
       ],
       "featured": false
+    },
+    {
+      "id": "1781827600252",
+      "name": "WorkBuddy",
+      "url": "https://www.codebuddy.cn/work/",
+      "category": "claw",
+      "description": "腾讯龙虾",
+      "tags": [],
+      "featured": true
     }
   ]
 }
