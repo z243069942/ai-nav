@@ -59,6 +59,12 @@
       "name": "研究分析",
       "icon": "🔬",
       "description": "AI 研究与数据分析"
+    },
+    {
+      "id": "claw",
+      "name": "Claw(龙虾)",
+      "icon": "🐉",
+      "description": "龙虾智能体"
     }
   ],
   "apps": [
@@ -69,7 +75,11 @@
       "category": "chat",
       "description": "OpenAI 推出的全球最流行 AI 对话助手，支持 GPT-4o 等多种模型",
       "icon": "https://chatgpt.com/favicon.ico",
-      "tags": ["OpenAI", "GPT-4", "免费/付费"],
+      "tags": [
+        "OpenAI",
+        "GPT-4",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -79,7 +89,11 @@
       "category": "chat",
       "description": "Anthropic 出品的 AI 助手，擅长长文档处理和深度思考",
       "icon": "https://claude.ai/favicon.ico",
-      "tags": ["Anthropic", "长文本", "免费/付费"],
+      "tags": [
+        "Anthropic",
+        "长文本",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -89,7 +103,11 @@
       "category": "chat",
       "description": "Google 出品的多模态 AI 助手，深度集成 Google 生态",
       "icon": "https://gemini.google.com/favicon.ico",
-      "tags": ["Google", "多模态", "免费/付费"],
+      "tags": [
+        "Google",
+        "多模态",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -99,7 +117,11 @@
       "category": "chat",
       "description": "百度出品的国产大语言模型，支持中文对话与创作",
       "icon": "https://yiyan.baidu.com/favicon.ico",
-      "tags": ["百度", "国产", "免费"],
+      "tags": [
+        "百度",
+        "国产",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -109,7 +131,11 @@
       "category": "chat",
       "description": "阿里巴巴出品的 AI 助手，支持多模态和长上下文",
       "icon": "https://tongyi.aliyun.com/favicon.ico",
-      "tags": ["阿里", "国产", "免费"],
+      "tags": [
+        "阿里",
+        "国产",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -119,7 +145,11 @@
       "category": "chat",
       "description": "字节跳动出品的 AI 助手，界面友好，功能丰富",
       "icon": "https://www.doubao.com/favicon.ico",
-      "tags": ["字节", "国产", "免费"],
+      "tags": [
+        "字节",
+        "国产",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -129,7 +159,11 @@
       "category": "chat",
       "description": "月之暗面出品，支持 200 万字超长上下文",
       "icon": "https://kimi.moonshot.cn/favicon.ico",
-      "tags": ["月之暗面", "长文本", "免费"],
+      "tags": [
+        "月之暗面",
+        "长文本",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -139,7 +173,11 @@
       "category": "chat",
       "description": "深度求索出品，数学和代码推理能力突出的国产模型",
       "icon": "https://chat.deepseek.com/favicon.ico",
-      "tags": ["深度求索", "推理", "免费"],
+      "tags": [
+        "深度求索",
+        "推理",
+        "免费"
+      ],
       "featured": true
     },
     {
@@ -149,7 +187,11 @@
       "category": "search",
       "description": "基于 AI 的智能搜索引擎，实时联网并给出有来源的答案",
       "icon": "https://www.perplexity.ai/favicon.ico",
-      "tags": ["搜索", "联网", "免费/付费"],
+      "tags": [
+        "搜索",
+        "联网",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -159,7 +201,11 @@
       "category": "image",
       "description": "全球顶级 AI 图像生成工具，艺术风格卓越",
       "icon": "https://www.midjourney.com/favicon.ico",
-      "tags": ["图像", "艺术", "付费"],
+      "tags": [
+        "图像",
+        "艺术",
+        "付费"
+      ],
       "featured": true
     },
     {
@@ -169,7 +215,11 @@
       "category": "image",
       "description": "开源 AI 图像生成模型，可本地部署，高度可定制",
       "icon": "https://stability.ai/favicon.ico",
-      "tags": ["开源", "图像", "免费"],
+      "tags": [
+        "开源",
+        "图像",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -179,7 +229,11 @@
       "category": "image",
       "description": "OpenAI 出品的图像生成模型，理解指令精准",
       "icon": "https://openai.com/favicon.ico",
-      "tags": ["OpenAI", "图像", "付费"],
+      "tags": [
+        "OpenAI",
+        "图像",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -189,7 +243,11 @@
       "category": "image",
       "description": "Adobe 出品的创意 AI 工具，可商用的 AI 图像生成",
       "icon": "https://firefly.adobe.com/favicon.ico",
-      "tags": ["Adobe", "商用", "免费/付费"],
+      "tags": [
+        "Adobe",
+        "商用",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -199,7 +257,11 @@
       "category": "image",
       "description": "字节跳动旗下 AI 图像与视频生成平台",
       "icon": "https://jimeng.jianying.com/favicon.ico",
-      "tags": ["字节", "国产", "免费"],
+      "tags": [
+        "字节",
+        "国产",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -209,7 +271,11 @@
       "category": "image",
       "description": "百度出品的 AI 绘画创作平台",
       "icon": "https://yige.baidu.com/favicon.ico",
-      "tags": ["百度", "国产", "免费"],
+      "tags": [
+        "百度",
+        "国产",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -219,7 +285,11 @@
       "category": "code",
       "description": "GitHub 出品的 AI 编程助手，支持多种 IDE 插件",
       "icon": "https://github.com/favicon.ico",
-      "tags": ["代码", "IDE", "付费"],
+      "tags": [
+        "代码",
+        "IDE",
+        "付费"
+      ],
       "featured": true
     },
     {
@@ -229,7 +299,11 @@
       "category": "code",
       "description": "AI 原生代码编辑器，集成 Claude 和 GPT-4 的超强编程助手",
       "icon": "https://cursor.sh/favicon.ico",
-      "tags": ["代码", "IDE", "免费/付费"],
+      "tags": [
+        "代码",
+        "IDE",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -239,7 +313,11 @@
       "category": "code",
       "description": "AI 代码补全工具，支持 30+ 种编程语言",
       "icon": "https://www.tabnine.com/favicon.ico",
-      "tags": ["代码", "补全", "免费/付费"],
+      "tags": [
+        "代码",
+        "补全",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -249,7 +327,11 @@
       "category": "code",
       "description": "在线 IDE 集成 AI，支持一键部署应用",
       "icon": "https://replit.com/favicon.ico",
-      "tags": ["在线IDE", "部署", "免费/付费"],
+      "tags": [
+        "在线IDE",
+        "部署",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -259,7 +341,11 @@
       "category": "code",
       "description": "Vercel 出品的 AI 前端代码生成工具，生成 React 组件",
       "icon": "https://v0.dev/favicon.ico",
-      "tags": ["前端", "React", "免费/付费"],
+      "tags": [
+        "前端",
+        "React",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -269,7 +355,11 @@
       "category": "writing",
       "description": "专业 AI 营销文案工具，支持多种文案场景",
       "icon": "https://www.jasper.ai/favicon.ico",
-      "tags": ["文案", "营销", "付费"],
+      "tags": [
+        "文案",
+        "营销",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -279,7 +369,11 @@
       "category": "writing",
       "description": "AI 文案生成平台，快速生成各类营销内容",
       "icon": "https://www.copy.ai/favicon.ico",
-      "tags": ["文案", "营销", "免费/付费"],
+      "tags": [
+        "文案",
+        "营销",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -289,7 +383,11 @@
       "category": "writing",
       "description": "Notion 内置 AI 写作助手，支持文档生成与优化",
       "icon": "https://www.notion.so/favicon.ico",
-      "tags": ["文档", "笔记", "付费"],
+      "tags": [
+        "文档",
+        "笔记",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -299,7 +397,11 @@
       "category": "writing",
       "description": "国产 AI 写作辅助工具，支持中文文章生成与润色",
       "icon": "https://xiezuocat.com/favicon.ico",
-      "tags": ["中文", "写作", "免费/付费"],
+      "tags": [
+        "中文",
+        "写作",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -309,7 +411,11 @@
       "category": "video",
       "description": "OpenAI 出品的文生视频模型，生成高质量视频",
       "icon": "https://sora.com/favicon.ico",
-      "tags": ["OpenAI", "文生视频", "付费"],
+      "tags": [
+        "OpenAI",
+        "文生视频",
+        "付费"
+      ],
       "featured": true
     },
     {
@@ -319,7 +425,11 @@
       "category": "video",
       "description": "快手出品的 AI 视频生成工具，效果出色",
       "icon": "https://klingai.kuaishou.com/favicon.ico",
-      "tags": ["快手", "国产", "免费/付费"],
+      "tags": [
+        "快手",
+        "国产",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -329,7 +439,11 @@
       "category": "video",
       "description": "专业 AI 视频生成与编辑平台，创意工具丰富",
       "icon": "https://runwayml.com/favicon.ico",
-      "tags": ["视频", "编辑", "付费"],
+      "tags": [
+        "视频",
+        "编辑",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -339,7 +453,11 @@
       "category": "video",
       "description": "字节跳动出品的 AI 视频剪辑工具，功能强大",
       "icon": "https://www.capcut.cn/favicon.ico",
-      "tags": ["剪辑", "字节", "免费"],
+      "tags": [
+        "剪辑",
+        "字节",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -349,7 +467,11 @@
       "category": "audio",
       "description": "顶级 AI 音乐生成工具，输入歌词秒出成品歌曲",
       "icon": "https://suno.com/favicon.ico",
-      "tags": ["音乐", "生成", "免费/付费"],
+      "tags": [
+        "音乐",
+        "生成",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -359,7 +481,11 @@
       "category": "audio",
       "description": "高质量 AI 音乐生成，支持多种音乐风格",
       "icon": "https://www.udio.com/favicon.ico",
-      "tags": ["音乐", "生成", "免费/付费"],
+      "tags": [
+        "音乐",
+        "生成",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -369,7 +495,11 @@
       "category": "audio",
       "description": "业界最佳 AI 语音合成工具，声音克隆技术领先",
       "icon": "https://elevenlabs.io/favicon.ico",
-      "tags": ["语音", "克隆", "免费/付费"],
+      "tags": [
+        "语音",
+        "克隆",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -379,7 +509,11 @@
       "category": "chat",
       "description": "科大讯飞出品的国产大模型，语音交互能力突出",
       "icon": "https://xinghuo.xfyun.cn/favicon.ico",
-      "tags": ["讯飞", "国产", "免费"],
+      "tags": [
+        "讯飞",
+        "国产",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -389,7 +523,11 @@
       "category": "productivity",
       "description": "集笔记、项目管理和 AI 于一体的效率工具",
       "icon": "https://notion.so/favicon.ico",
-      "tags": ["笔记", "项目", "免费/付费"],
+      "tags": [
+        "笔记",
+        "项目",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -399,7 +537,11 @@
       "category": "productivity",
       "description": "AI 驱动的演示文稿生成工具，一句话生成精美 PPT",
       "icon": "https://gamma.app/favicon.ico",
-      "tags": ["PPT", "演示", "免费/付费"],
+      "tags": [
+        "PPT",
+        "演示",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -409,7 +551,11 @@
       "category": "productivity",
       "description": "AI 辅助 PPT 设计平台，自动排版美化",
       "icon": "https://www.beautiful.ai/favicon.ico",
-      "tags": ["PPT", "设计", "付费"],
+      "tags": [
+        "PPT",
+        "设计",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -419,7 +565,11 @@
       "category": "productivity",
       "description": "AI 会议记录与转录工具，自动生成会议摘要",
       "icon": "https://otter.ai/favicon.ico",
-      "tags": ["会议", "转录", "免费/付费"],
+      "tags": [
+        "会议",
+        "转录",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -429,7 +579,11 @@
       "category": "design",
       "description": "设计协作工具，内置 AI 辅助生成 UI 组件",
       "icon": "https://www.figma.com/favicon.ico",
-      "tags": ["UI", "设计", "免费/付费"],
+      "tags": [
+        "UI",
+        "设计",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -439,7 +593,11 @@
       "category": "design",
       "description": "在线设计平台集成多种 AI 功能，新手友好",
       "icon": "https://www.canva.com/favicon.ico",
-      "tags": ["设计", "模板", "免费/付费"],
+      "tags": [
+        "设计",
+        "模板",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -449,7 +607,11 @@
       "category": "design",
       "description": "AI Logo 设计生成器，几分钟生成专业品牌标识",
       "icon": "https://looka.com/favicon.ico",
-      "tags": ["Logo", "品牌", "付费"],
+      "tags": [
+        "Logo",
+        "品牌",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -459,7 +621,11 @@
       "category": "search",
       "description": "隐私优先的 AI 搜索引擎，集成多个 AI 模型",
       "icon": "https://you.com/favicon.ico",
-      "tags": ["搜索", "隐私", "免费"],
+      "tags": [
+        "搜索",
+        "隐私",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -469,7 +635,11 @@
       "category": "search",
       "description": "专为开发者设计的 AI 搜索引擎",
       "icon": "https://www.phind.com/favicon.ico",
-      "tags": ["搜索", "编程", "免费"],
+      "tags": [
+        "搜索",
+        "编程",
+        "免费"
+      ],
       "featured": false
     },
     {
@@ -479,7 +649,11 @@
       "category": "chat",
       "description": "xAI 出品，可访问 X 平台实时数据的 AI 助手",
       "icon": "https://grok.com/favicon.ico",
-      "tags": ["xAI", "实时", "免费/付费"],
+      "tags": [
+        "xAI",
+        "实时",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -489,7 +663,11 @@
       "category": "video",
       "description": "AI 数字人视频生成平台，支持多语言口播",
       "icon": "https://www.heygen.com/favicon.ico",
-      "tags": ["数字人", "口播", "付费"],
+      "tags": [
+        "数字人",
+        "口播",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -499,7 +677,11 @@
       "category": "video",
       "description": "AI 视频生成工具，支持图片转视频",
       "icon": "https://pika.art/favicon.ico",
-      "tags": ["视频", "图生视频", "免费/付费"],
+      "tags": [
+        "视频",
+        "图生视频",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -509,7 +691,11 @@
       "category": "audio",
       "description": "专业 AI 配音工具，支持 20+ 种语言",
       "icon": "https://murf.ai/favicon.ico",
-      "tags": ["配音", "语音", "付费"],
+      "tags": [
+        "配音",
+        "语音",
+        "付费"
+      ],
       "featured": false
     },
     {
@@ -519,7 +705,11 @@
       "category": "research",
       "description": "AI 学术搜索引擎，直接从论文中提取答案",
       "icon": "https://consensus.app/favicon.ico",
-      "tags": ["学术", "论文", "免费/付费"],
+      "tags": [
+        "学术",
+        "论文",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -529,7 +719,11 @@
       "category": "research",
       "description": "AI 研究助手，自动化文献综述流程",
       "icon": "https://elicit.com/favicon.ico",
-      "tags": ["研究", "文献", "免费/付费"],
+      "tags": [
+        "研究",
+        "文献",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -539,7 +733,11 @@
       "category": "research",
       "description": "AI 数据分析工具，上传数据自动生成可视化报告",
       "icon": "https://julius.ai/favicon.ico",
-      "tags": ["数据", "分析", "免费/付费"],
+      "tags": [
+        "数据",
+        "分析",
+        "免费/付费"
+      ],
       "featured": false
     },
     {
@@ -549,7 +747,11 @@
       "category": "code",
       "description": "StackBlitz 出品的 AI 全栈应用生成器，一键生成完整项目",
       "icon": "https://bolt.new/favicon.ico",
-      "tags": ["全栈", "生成", "免费/付费"],
+      "tags": [
+        "全栈",
+        "生成",
+        "免费/付费"
+      ],
       "featured": true
     },
     {
@@ -559,7 +761,11 @@
       "category": "code",
       "description": "AI 驱动的 Web 应用构建工具，无需编程基础",
       "icon": "https://lovable.dev/favicon.ico",
-      "tags": ["Web", "无代码", "免费/付费"],
+      "tags": [
+        "Web",
+        "无代码",
+        "免费/付费"
+      ],
       "featured": false
     }
   ]
